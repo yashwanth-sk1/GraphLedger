@@ -1,0 +1,107 @@
+GraphLedger — SIH Demo Notes
+=============================
+Cross-Bank, Cryptocurrency & NFT Transaction Intelligence
+
+F1 Innovation
+  The same transaction is evaluated as part of a NETWORK that can span
+  THREE financial ecosystems — banking, cryptocurrency, and NFTs — not
+  just one. A bank transfer, a crypto wallet hop, and an NFT sale are
+  connected into a single temporal chain if they happen close enough in
+  time, even though each individually looks unremarkable.
+
+F2 Feasibility
+  Python + Streamlit + NetworkX + Plotly + a hash-linked ledger is
+  enough for a working, demoable MVP today, with no external services,
+  no API keys, and no database server required.
+
+F3 UX
+  Six tabs — Overview, Transaction Graph, Risk Alerts, Crypto & NFT
+  Intelligence, Investigation, Ledger Verification — plus sidebar
+  filters and live-adjustable detection thresholds.
+
+F4 Impact
+  Show an investigator tracing a chain like:
+  Bank A -> Bank B -> Exchange -> Wallet -> Wallet -> Wallet ->
+  NFT Marketplace -> NFT -> Wallet -> Exchange -> Bank C
+  in a few clicks, instead of manually cross-referencing records across
+  three completely different kinds of financial infrastructure.
+
+F5 Technical execution
+  End-to-end flow: generate synthetic multi-domain transactions -> build
+  the unified graph -> run domain-specific + cross-domain detectors ->
+  compute a weighted explainable risk score -> verify ledger integrity.
+
+F6 Future scope
+  Permissioned DLT (Hyperledger Fabric / permissioned EVM), streaming
+  ingestion, a trained ML/Graph Neural Network risk model, live
+  crypto/NFT price feeds, privacy-preserving cross-institution data
+  sharing, graph community-detection for fraud rings.
+
+F7 Business model
+  Enterprise licensing for banks, NBFCs, FinTechs, and crypto exchanges —
+  priced by number of institutions, transaction volume, and feature tier
+  (alerts only vs. full investigation suite vs. ledger hosting).
+
+F8 Security
+  Synthetic, pseudonymous entity IDs everywhere. No raw PII on the shared
+  layer. Tamper-evident SHA-256 hash chain over the full multi-domain
+  transaction payload — any historical edit breaks verification.
+
+What makes this version stronger than a single-domain fraud detector
+-----------------------------------------------------------------------
+Most fraud-detection prototypes look at one domain (bank transactions,
+or crypto wallets, or NFT trades) in isolation. GraphLedger's core claim
+is that value launderers increasingly move value ACROSS these domains
+precisely because each domain's monitoring stops at its own boundary.
+The "Cross-ecosystem rapid movement" alert is the single strongest
+demo moment because it's the pattern most existing tools cannot see.
+
+Suggested demo script (~4-5 minutes)
+---------------------------------------
+1. Open the dashboard. Point at the top metrics: banks, wallets,
+   exchanges, NFT assets, transactions, alerts.
+   "This is one unified view across three financial ecosystems, not
+   three separate tools."
+
+2. Transaction Graph tab.
+   Point at the color-coded legend and the red suspicious nodes.
+   "Bank accounts, exchanges, wallets, and NFT marketplaces are all
+   nodes in the same graph."
+
+3. Risk Alerts tab.
+   Open "Cross-ecosystem rapid movement."
+   Read the path, duration, hop count, value velocity, retention %.
+   "This chain moved through a bank, an exchange, three wallets, an
+   NFT marketplace, and back into another bank -- in under two and a
+   half minutes. Individually none of these hops looks unusual."
+
+4. Crypto & NFT Intelligence tab.
+   Show the crypto/NFT transaction tables and the synthetic price
+   table. Say clearly: "synthetic demo valuations, not live prices."
+
+5. Investigation tab.
+   Pick a wallet from the multi-wallet chain. Show its velocity numbers
+   and the connected-path velocity table (time, amount, elapsed,
+   cumulative).
+
+6. Ledger Verification tab.
+   Click "Build / Verify Ledger."
+   "The transaction history -- across all three domains -- is
+   protected by a hash-linked ledger. If a historical transaction is
+   modified, the hash chain no longer matches and verification fails."
+
+7. Move a sidebar threshold slider (e.g. rapid-hop window) live and
+   show an alert appear or disappear.
+   "Judges can test the detection logic themselves, right now."
+
+8. Click "Simulate Suspicious Network" for a live-injected pattern as
+   the closing beat.
+
+What we deliberately did NOT build yet (say this out loud if asked)
+---------------------------------------------------------------------
+No Hyperledger Fabric, Kafka, a trained ML/GNN model, live crypto/NFT
+price feeds, or real bank/exchange/marketplace APIs. For an evaluation
+like this, a small prototype that actually runs end-to-end across three
+domains is stronger than a large architecture diagram where half the
+components are unproven claims. Roadmap items are framed explicitly as
+roadmap, never as things already built.
